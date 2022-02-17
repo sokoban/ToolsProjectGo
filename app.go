@@ -5,6 +5,45 @@ import (
 	"strconv"
 )
 
+type Member struct {
+	UserID  string
+	UserNo  int
+	Name    string
+	Address string
+}
+
+type VIPMember struct {
+	Member
+	Level int
+}
+
+func UserSt() {
+	user := Member{"guest", 1213, "김수로", "경기도"}
+	vip := VIPMember{
+		user,
+		3,
+	}
+
+	var vip2 []VIPMember
+
+	vip2 = append(vip2, vip)
+	vip2 = append(vip2, vip)
+	vip2 = append(vip2, vip)
+
+	for i, a := range vip2 {
+		fmt.Println(i, a)
+	}
+
+	fmt.Printf("유저: %s ID: %s 주소 %s\n", user.Name, user.UserID, user.Address)
+	fmt.Printf("VIP 유저: %s ID: %s 나이 %d VIP 레벨: %d 유저 레벨:%s\n",
+		vip.Name,
+		vip.UserID,
+		vip.UserNo,
+		vip.Level,
+		vip.Member.Name,
+	)
+}
+
 func Attach(data string) (string, int) {
 
 	var result string
@@ -38,6 +77,7 @@ func main() {
 
 	var data string = "bye"
 	ret, index := Attach(data)
+	UserSt()
 
 	fmt.Println(ret + ": length : " + strconv.Itoa(index))
 
@@ -63,9 +103,7 @@ func main() {
 		fmt.Println("Good Bye")
 	}
 	for a := 0; a < 10; a++ {
-
 		fmt.Println(a, data)
-
 	}
 
 }
